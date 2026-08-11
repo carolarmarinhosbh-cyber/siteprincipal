@@ -143,14 +143,14 @@
 
         .top-bar .social {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-shrink: 0;
         }
 
         .top-bar .social a {
             color: #666;
             transition: color 0.3s;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .top-bar .social a:hover {
@@ -1285,7 +1285,11 @@
 
         /* Mobile */
         @media (max-width: 768px) {
-            /* Top Bar */
+            /* Top Bar - Ícones maiores */
+            .top-bar .social a {
+                font-size: 17px;
+            }
+
             .top-bar .info span {
                 font-size: 9px;
                 gap: 4px;
@@ -1293,10 +1297,6 @@
 
             .top-bar .info {
                 gap: 6px;
-            }
-
-            .top-bar .social a {
-                font-size: 11px;
             }
 
             /* Header - Menu mobile */
@@ -1546,6 +1546,11 @@
 
         /* Mobile pequeno */
         @media (max-width: 480px) {
+            /* Top Bar - Ícones ainda maiores */
+            .top-bar .social a {
+                font-size: 19px;
+            }
+
             .hero-content h1 {
                 font-size: 20px;
             }
@@ -1556,10 +1561,6 @@
 
             .top-bar .info span {
                 font-size: 8px;
-            }
-
-            .top-bar .social a {
-                font-size: 10px;
             }
 
             .top-bar .info {
@@ -1725,8 +1726,8 @@
                     <a href="https://wa.me/5531996070930?text=Olá%2C%20gostaria%20de%20fazer%20um%20pedido!" target="_blank" class="btn-primary">
                         <i class="fab fa-whatsapp"></i> Comprar Agora
                     </a>
-                    <a href="#categorias" class="btn-secondary">
-                        <i class="fas fa-arrow-right"></i> Ver Produtos
+                    <a href="https://wa.me/c/553196070930" target="_blank" class="btn-secondary">
+                        <i class="fas fa-book"></i> Ver Catálogo
                     </a>
                 </div>
                 <div class="hero-stats">
@@ -2048,7 +2049,7 @@
                     <h4>Horário</h4>
                     <ul>
                         <li><a href="#"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 18:00</a></li>
-                        <li><a href="#"><i class="fas fa-clock"></i> Domingos/Feriados: Fechado</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Domingos: Fechado</a></li>
                         <li><a href="#"><i class="fas fa-id-card"></i> CNPJ: 10.648.303/0001-79</a></li>
                     </ul>
                 </div>
@@ -2102,7 +2103,7 @@
                 <span class="time">08:00 - 18:00</span>
             </div>
             <div class="schedule-item">
-                <span class="day">Domingo/Feriados</span>
+                <span class="day">Domingo</span>
                 <span class="closed">Fechado</span>
             </div>
 
@@ -2152,13 +2153,6 @@
                 }
             });
         });
-
-        // Impedir scroll horizontal
-        document.addEventListener('touchmove', function(e) {
-            if (e.target.closest('.nav-links')) {
-                return;
-            }
-        }, { passive: true });
 
         // ===== MODAL HORÁRIO =====
         const modal = document.getElementById('scheduleModal');
