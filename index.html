@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>Carol Armarinhos - Sua loja de informática, presentes e muito mais</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f6f3;
+            color: #1a1a1a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f0ece6;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cc0000;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b30000;
+        }
+
+        /* ===== ANIMAÇÕES ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes pulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            background: #1a1a1a;
+            padding: 8px 0;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .top-bar .info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .top-bar .info i {
+            color: #cc0000;
+            margin-right: 6px;
+            font-size: 13px;
+        }
+
+        .top-bar .info span {
+            display: inline-flex;
+            align-items: center;
+            color: #ccc;
+        }
+
+        .top-bar .social {
+            display: flex;
+            gap: 14px;
+        }
+
+        .top-bar .social a {
+            color: #666;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+
+        .top-bar .social a:hover {
+            color: #cc0000;
+        }
+
+        /* ===== HEADER / NAV ===== */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #f0ece6;
+            transition: all 0.3s ease;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            color: #cc0000;
+        }
+
+        .logo-sub {
+            font-size: 11px;
+            color: #888;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: #444;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #cc0000;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #1a1a1a;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links .btn-nav {
+            background: #cc0000;
+            color: #fff !important;
+            padding: 8px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-links .btn-nav:hover {
+            background: #e60000;
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(204, 0, 0, 0.3);
+            color: #fff !important;
+        }
+
+        .nav-links .btn-nav::after {
+            display: none;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 2.5px;
+            background: #1a1a1a;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            padding: 80px 0 60px;
+            background: linear-gradient(135deg, #f8f6f3 0%, #fff 50%, #faf5f0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(204, 0, 0, 0.04), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            letter-spacing: -1px;
+        }
+
+        .hero-content h1 span {
+            color: #cc0000;
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: #555;
+            max-width: 500px;
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #cc0000, #e60000);
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 25px rgba(204, 0, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(204, 0, 0, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1a1a1a;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            border: 2px solid #d0c8c0;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-secondary:hover {
+            border-color: #cc0000;
+            color: #cc0000;
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1;
+            border-radius: 30px;
+            object-fit: cover;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e8e0d8;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.02);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .hero-stats .stat {
+            text-align: center;
+        }
+
+        .hero-stats .stat .number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #cc0000;
+        }
+
+        .hero-stats .stat .label {
+            font-size: 13px;
+            color: #888;
+            margin-top: 4px;
+        }
+
+        /* ===== BENEFITS BAR ===== */
+        .benefits-bar {
+            background: #ffffff;
+            padding: 24px 0;
+            border-top: 1px solid #f0ece6;
+            border-bottom: 1px solid #f0ece6;
+        }
+
+        .benefits-bar .container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .benefits-bar .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            color: #444;
+        }
+
+        .benefits-bar .benefit-item i {
+            color: #cc0000;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(204, 0, 0, 0.06);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .benefits-bar .benefit-item strong {
+            color: #1a1a1a;
+        }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-title h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .section-title h2 span {
+            color: #cc0000;
+        }
+
+        .section-title p {
+            color: #777;
+            font-size: 17px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== LOGO DESTAQUE ===== */
+        .logo-showcase {
+            padding: 40px 0 60px;
+            background: #ffffff;
+            text-align: center;
+            border-bottom: 1px solid #f0ece6;
+        }
+
+        .logo-showcase .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-showcase .logo-container img {
+            max-width: 280px;
+            height: auto;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-showcase .logo-container img:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-showcase .logo-container p {
+            color: #888;
+            font-size: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* ===== CATEGORIES ===== */
+        .categories {
+            padding: 80px 0;
+            background: #faf8f6;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 24px;
+        }
+
+        .category-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            border: 1px solid #f0ece6;
+            transition: all 0.4s ease;
+            cursor: default;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            border-color: #cc0000;
+            box-shadow: 0 12px 40px rgba(204, 0, 0, 0.08);
+        }
+
+        .category-card .icon {
+            font-size: 36px;
+            color: #cc0000;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .category-card h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .category-card p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery {
+            padding: 80px 0;
+            background: #ffffff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s ease;
+            position: relative;
+            aspect-ratio: 4/3;
+            background: #f5f0ea;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 16px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+            color: #fff;
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            padding: 80px 0;
+            background: #faf8f6;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px 20px;
+            border: 1px solid #f0ece6;
+            transition: all 0.4s ease;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .service-card:hover {
+            border-color: #cc0000;
+            transform: translateY(-6px);
+            box-shadow: 0 8px 30px rgba(204, 0, 0, 0.08);
+        }
+
+        .service-card .icon {
+            font-size: 32px;
+            color: #cc0000;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .service-card h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .service-card p {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* ===== PERSONALIZED ===== */
+        .personalized {
+            padding: 80px 0;
+            background: #ffffff;
+        }
+
+        .personalized-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .personalized-card {
+            background: #faf8f6;
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            border: 1px solid #f0ece6;
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .personalized-card:hover {
+            border-color: #cc0000;
+            transform: translateY(-6px);
+            box-shadow: 0 8px 30px rgba(204, 0, 0, 0.08);
+        }
+
+        .personalized-card .icon {
+            font-size: 36px;
+            color: #cc0000;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .personalized-card h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .personalized-card p {
+            font-size: 13px;
+            color: #888;
+        }
+
+        /* ===== PRESENTS / GIFTS ===== */
+        .presents {
+            padding: 80px 0;
+            background: #faf8f6;
+        }
+
+        .presents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .present-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px 20px;
+            text-align: center;
+            border: 1px solid #f0ece6;
+            transition: all 0.4s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .present-card:hover {
+            border-color: #cc0000;
+            transform: translateY(-6px);
+            box-shadow: 0 8px 30px rgba(204, 0, 0, 0.08);
+        }
+
+        .present-card .icon {
+            font-size: 32px;
+            color: #cc0000;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .present-card h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        /* ===== DELIVERY ===== */
+        .delivery {
+            padding: 80px 0;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .delivery::before {
+            content: '';
+            position: absolute;
+            bottom: -20%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(204, 0, 0, 0.03), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .delivery .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .delivery-content h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+        }
+
+        .delivery-content h2 span {
+            color: #cc0000;
+        }
+
+        .delivery-content p {
+            color: #555;
+            font-size: 17px;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .delivery-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .delivery-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            color: #444;
+        }
+
+        .delivery-features li i {
+            color: #cc0000;
+            font-size: 18px;
+            width: 28px;
+        }
+
+        .delivery-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .delivery-image .placeholder-icon {
+            width: 100%;
+            max-width: 350px;
+            aspect-ratio: 1;
+            background: #faf8f6;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #f0ece6;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.04);
+            padding: 40px;
+            text-align: center;
+        }
+
+        .delivery-image .placeholder-icon i {
+            font-size: 60px;
+            color: #cc0000;
+            margin-bottom: 16px;
+        }
+
+        .delivery-image .placeholder-icon h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .delivery-image .placeholder-icon p {
+            color: #888;
+            font-size: 13px;
+        }
+
+        /* ===== CTA ===== */
+        .cta {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #faf8f6 0%, #f5f0ea 100%);
+            text-align: center;
+            border-top: 1px solid #f0ece6;
+            border-bottom: 1px solid #f0ece6;
+        }
+
+        .cta h2 {
+            font-size: 34px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .cta h2 span {
+            color: #cc0000;
+        }
+
+        .cta p {
+            color: #555;
+            font-size: 17px;
+            max-width: 600px;
+            margin: 0 auto 28px;
+        }
+
+        .cta .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 25px rgba(37, 211, 102, 0.25);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 35px rgba(37, 211, 102, 0.35);
+        }
+
+        .btn-catalog {
+            background: transparent;
+            color: #1a1a1a;
+            padding: 14px 36px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            border: 2px solid #d0c8c0;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-catalog:hover {
+            border-color: #cc0000;
+            color: #cc0000;
+            transform: translateY(-3px);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #1a1a1a;
+            padding: 60px 0 30px;
+            color: #ccc;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .footer-brand h3 span {
+            color: #cc0000;
+        }
+
+        .footer-brand p {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-col ul a {
+            color: #888;
+            font-size: 14px;
+            transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-col ul a:hover {
+            color: #cc0000;
+        }
+
+        .footer-col ul a i {
+            font-size: 14px;
+            width: 20px;
+            color: #cc0000;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #2a2a2a;
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .footer-bottom p {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .footer-bottom .social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-bottom .social a {
+            color: #666;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom .social a:hover {
+            color: #cc0000;
+        }
+
+        /* ===== WHATSAPP FLOATING BUTTON ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .whatsapp-float .btn-float {
+            width: 64px;
+            height: 64px;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 34px;
+            box-shadow: 0 4px 30px rgba(37, 211, 102, 0.35);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+            text-decoration: none;
+        }
+
+        .whatsapp-float .btn-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 40px rgba(37, 211, 102, 0.45);
+        }
+
+        .whatsapp-float .btn-float i {
+            color: #fff;
+        }
+
+        /* ===== MODAL HORÁRIO ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 420px;
+            width: 100%;
+            border: 1px solid #f0ece6;
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 0.4s ease;
+            position: relative;
+        }
+
+        .modal-content .close-modal {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .modal-content .close-modal:hover {
+            color: #1a1a1a;
+        }
+
+        .modal-content .modal-icon {
+            font-size: 48px;
+            color: #cc0000;
+            text-align: center;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .modal-content h2 {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .modal-content .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .modal-content .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0ece6;
+            font-size: 15px;
+        }
+
+        .modal-content .schedule-item:last-child {
+            border-bottom: none;
+        }
+
+        .modal-content .schedule-item .day {
+            color: #555;
+        }
+
+        .modal-content .schedule-item .time {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .modal-content .schedule-item .closed {
+            color: #cc0000;
+            font-weight: 600;
+        }
+
+        .modal-content .modal-whatsapp {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 14px;
+            background: rgba(37, 211, 102, 0.06);
+            border-radius: 12px;
+            border: 1px solid rgba(37, 211, 102, 0.15);
+            color: #25D366;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .modal-content .modal-whatsapp:hover {
+            background: rgba(37, 211, 102, 0.1);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin: 0 auto 32px;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .delivery .container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .delivery-features {
+                align-items: center;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-image img {
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 320px;
+                height: 100vh;
+                background: #ffffff;
+                flex-direction: column;
+                padding: 80px 32px 32px;
+                gap: 20px;
+                transition: right 0.4s ease;
+                border-left: 1px solid #f0ece6;
+                overflow-y: auto;
+                box-shadow: -4px 0 30px rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-links.open {
+                right: 0;
+            }
+
+            .nav-links a {
+                font-size: 18px;
+                color: #1a1a1a;
+            }
+
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .section-title h2 {
+                font-size: 28px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .top-bar .info {
+                gap: 12px;
+                font-size: 12px;
+            }
+
+            .benefits-bar .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .whatsapp-float .btn-float {
+                width: 56px;
+                height: 56px;
+                font-size: 28px;
+            }
+
+            .modal-content {
+                padding: 28px 20px;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+
+            .hero-image img {
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            .btn-primary,
+            .btn-secondary,
+            .btn-whatsapp,
+            .btn-catalog {
+                padding: 12px 24px;
+                font-size: 14px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .cta .btn-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .logo-showcase .logo-container img {
+                max-width: 200px;
+            }
+
+            .hero-image img {
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="info">
+                <span><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 18:00</span>
+                <span><i class="fas fa-phone"></i> (31) 99607-0930</span>
+                <span><i class="fas fa-map-marker-alt"></i> BH - MG</span>
+            </div>
+            <div class="social">
+                <a href="https://instagram.com/carolarmarinhobh" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/5531996070930" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:carolarmarinhosbh@gmail.com" aria-label="E-mail"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <div>
+                    <div class="logo-text">Carol <span>Armarinhos</span></div>
+                    <div class="logo-sub">Sua loja completa</div>
+                </div>
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#categorias">Produtos</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#personalizados">Personalizados</a></li>
+                <li><a href="#presentes">Presentes</a></li>
+                <li><a href="#galeria">Fotos</a></li>
+                <li><a href="#entrega">Entregas</a></li>
+                <li><a href="#contato" class="btn-nav">Fale Conosco</a></li>
+            </ul>
+
+            <div class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Compre com <span>conforto</span> sem sair de casa</h1>
+                <p>
+                    Na Carol Armarinhos você encontra tudo em informática, acessórios para celular,
+                    brinquedos, descartáveis, presentes personalizados e serviços de impressão.
+                    Tudo com entrega rápida e atendimento personalizado.
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/5531996070930?text=Olá%2C%20gostaria%20de%20fazer%20um%20pedido!" target="_blank" class="btn-primary">
+                        <i class="fab fa-whatsapp"></i> Comprar Agora
+                    </a>
+                    <a href="#categorias" class="btn-secondary">
+                        <i class="fas fa-arrow-right"></i> Ver Produtos
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="number">2h</div>
+                        <div class="label">Entrega média</div>
+                    </div>
+                    <div class="stat">
+                        <div class="number">R$ 50</div>
+                        <div class="label">Frete grátis* (até 2km)</div>
+                    </div>
+                    <div class="stat">
+                        <div class="number">+500</div>
+                        <div class="label">Produtos</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGX1o9ytX4D0Zvxr47A7Ou0pwCGodmbZeUUNJYJMcbKA&s=10" alt="Carol Armarinhos - Loja" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== LOGO DESTAQUE ===== -->
+    <section class="logo-showcase" id="logo">
+        <div class="container">
+            <div class="logo-container animate-on-scroll">
+                <img src="https://cdn.awsli.com.br/1608/1608652/arquivos/gemini_generated_image_g4vy0jg4vy0jg4vy.png" alt="Carol Armarinhos - Logo Oficial" />
+                <p><strong>Carol Armarinhos</strong> - Sua loja de confiança em Belo Horizonte</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BENEFITS BAR ===== -->
+    <div class="benefits-bar">
+        <div class="container">
+            <div class="benefit-item">
+                <i class="fas fa-truck"></i>
+                <span><strong>Entrega rápida</strong> em até 2h</span>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-gift"></i>
+                <span><strong>Frete grátis</strong> a partir de R$ 50* (até 2km)</span>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-credit-card"></i>
+                <span><strong>Várias formas</strong> de pagamento</span>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-headset"></i>
+                <span><strong>Atendimento</strong> humanizado</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CATEGORIES ===== -->
+    <section class="categories" id="categorias">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Nossas <span>Categorias</span></h2>
+                <p>Encontre tudo o que você precisa em um só lugar</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-laptop"></i></span>
+                    <h4>Informática</h4>
+                    <p>Teclados, mouses, pendrives, cabos, caixas de som, fones e periféricos</p>
+                </div>
+                <div class="category-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-mobile-alt"></i></span>
+                    <h4>Acessórios Celular</h4>
+                    <p>Carregadores, fones, cabos, suportes para veículos e motos</p>
+                </div>
+                <div class="category-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-robot"></i></span>
+                    <h4>Brinquedos</h4>
+                    <p>Opções diversas para crianças de todas as idades</p>
+                </div>
+                <div class="category-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-utensils"></i></span>
+                    <h4>Descartáveis</h4>
+                    <p>Copos, pratos, guardanapos, talheres, canudos, sacos e sacolas</p>
+                </div>
+                <div class="category-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-gift"></i></span>
+                    <h4>Presentes</h4>
+                    <p>Kits com chocolates, presentes para crianças, adultos, homens e mulheres</p>
+                </div>
+                <div class="category-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-print"></i></span>
+                    <h4>Serviços</h4>
+                    <p>Xerox, impressão, plastificação, fotos, cartões, adesivos, banners e panfletos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="gallery" id="galeria">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Conheça nossa <span>Loja</span></h2>
+                <p>Venha nos visitar ou compre pelo WhatsApp e receba em casa</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item animate-on-scroll">
+                    <img src="https://cdn.awsli.com.br/1608/1608652/arquivos/loja-01.jpeg" alt="Fachada da Carol Armarinhos" />
+                    <div class="gallery-overlay">📸 Fachada da Loja</div>
+                </div>
+                <div class="gallery-item animate-on-scroll">
+                    <img src="https://cdn.awsli.com.br/1608/1608652/arquivos/fachada.png" alt="Interior da Carol Armarinhos" />
+                    <div class="gallery-overlay">📸 Interior - Setor de Informática</div>
+                </div>
+                <div class="gallery-item animate-on-scroll">
+                    <img src="https://cdn.awsli.com.br/1608/1608652/arquivos/loja-03.jpeg" alt="Seção de presentes da Carol Armarinhos" />
+                    <div class="gallery-overlay">📸 Seção de Presentes e Kits</div>
+                </div>
+                <div class="gallery-item animate-on-scroll">
+                    <img src="https://cdn.awsli.com.br/1608/1608652/arquivos/loja-02.jpeg" alt="Serviços de impressão da Carol Armarinhos" />
+                    <div class="gallery-overlay">📸 Serviços de Impressão e Xerox</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services" id="servicos">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Serviços <span>Especializados</span></h2>
+                <p>Atendemos suas necessidades com qualidade e agilidade</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-copy"></i></span>
+                    <h4>Xerox e Impressão</h4>
+                    <p>Cópias, impressões coloridas e P&B com alta qualidade</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-id-card"></i></span>
+                    <h4>Segunda Via de Contas</h4>
+                    <p>Impressão rápida de boletos e contas</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-image"></i></span>
+                    <h4>Impressão de Fotos</h4>
+                    <p>Fotos em diversos tamanhos com qualidade profissional</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-address-card"></i></span>
+                    <h4>Cartões e Panfletos</h4>
+                    <p>Cartões de visita, adesivos, panfletos e materiais promocionais</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-flag"></i></span>
+                    <h4>Banners</h4>
+                    <p>Banners personalizados para eventos, lojas e promoções</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-magnet"></i></span>
+                    <h4>Ímãs de Geladeira</h4>
+                    <p>Ímãs personalizados com fotos, frases e logos</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-layer-group"></i></span>
+                    <h4>Plastificação</h4>
+                    <p>Proteja seus documentos com plastificação de qualidade</p>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-wrench"></i></span>
+                    <h4>Serviços de Informática</h4>
+                    <p>Suporte e soluções para seus equipamentos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PERSONALIZED ===== -->
+    <section class="personalized" id="personalizados">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Personalizados <span>Exclusivos</span></h2>
+                <p>Crie produtos únicos com a sua cara</p>
+            </div>
+            <div class="personalized-grid">
+                <div class="personalized-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-mug-hot"></i></span>
+                    <h4>Canecas Personalizadas</h4>
+                    <p>Canecas com fotos, frases e logos para presentear ou usar no dia a dia</p>
+                </div>
+                <div class="personalized-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-tshirt"></i></span>
+                    <h4>Camisas Personalizadas</h4>
+                    <p>Camisetas com estampas exclusivas, fotos e mensagens personalizadas</p>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:32px;">
+                <a href="https://wa.me/5531996070930?text=Olá%2C%20gostaria%20de%20fazer%20um%20pedido%20personalizado!" target="_blank" class="btn-primary">
+                    <i class="fab fa-whatsapp"></i> Faça seu Pedido Personalizado
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRESENTS ===== -->
+    <section class="presents" id="presentes">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Presentes para <span>Todas as Ocasiões</span></h2>
+                <p>Surpreenda quem você ama com presentes especiais</p>
+            </div>
+            <div class="presents-grid">
+                <div class="present-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-heart"></i></span>
+                    <h4>Kits Românticos</h4>
+                </div>
+                <div class="present-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-child"></i></span>
+                    <h4>Presentes Infantis</h4>
+                </div>
+                <div class="present-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-male"></i></span>
+                    <h4>Para Homens</h4>
+                </div>
+                <div class="present-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-female"></i></span>
+                    <h4>Para Mulheres</h4>
+                </div>
+                <div class="present-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-chocolate-bar"></i></span>
+                    <h4>Kits com Chocolates</h4>
+                </div>
+                <div class="present-card animate-on-scroll">
+                    <span class="icon"><i class="fas fa-birthday-cake"></i></span>
+                    <h4>Kits para Aniversário</h4>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:32px;">
+                <a href="https://wa.me/c/553196070930" target="_blank" class="btn-primary">
+                    <i class="fas fa-book"></i> Ver Catálogo de Presentes
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== DELIVERY ===== -->
+    <section class="delivery" id="entrega">
+        <div class="container">
+            <div class="delivery-content animate-on-scroll">
+                <h2>Entrega rápida e <span>conveniente</span></h2>
+                <p>
+                    Não precisa sair de casa! Entregamos em toda Belo Horizonte com agilidade
+                    e segurança. Compre com conforto e receba seus produtos rapidamente.
+                </p>
+                <ul class="delivery-features">
+                    <li><i class="fas fa-check-circle"></i> <strong>Frete grátis</strong> para compras a partir de R$ 50,00* (até 2km)</li>
+                    <li><i class="fas fa-clock"></i> <strong>Prazo médio de entrega:</strong> 2 horas</li>
+                    <li><i class="fas fa-map-marked-alt"></i> Entregamos em <strong>toda Belo Horizonte</strong> - consulte condições</li>
+                    <li><i class="fas fa-shield-alt"></i> <strong>Pagamento seguro</strong> na entrega ou via Pix</li>
+                </ul>
+                <div style="margin-top:24px;">
+                    <a href="https://wa.me/5531996070930?text=Olá%2C%20gostaria%20de%20consultar%20o%20frete%20para%20meu%20endereço!" target="_blank" class="btn-primary">
+                        <i class="fab fa-whatsapp"></i> Consultar Frete
+                    </a>
+                </div>
+            </div>
+            <div class="delivery-image animate-on-scroll">
+                <div class="placeholder-icon">
+                    <i class="fas fa-truck"></i>
+                    <h3>Entregamos em BH</h3>
+                    <p>Compre sem sair de casa</p>
+                    <div style="display:flex;gap:8px;margin-top:12px;font-size:14px;color:#cc0000;">
+                        <span>✅ Rápido</span>
+                        <span>✅ Seguro</span>
+                        <span>✅ Confiável</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta" id="contato">
+        <div class="container">
+            <h2>Pronto para <span>comprar</span>?</h2>
+            <p>Fale conosco agora mesmo e faça seu pedido. Atendimento rápido e personalizado.</p>
+            <div class="btn-group">
+                <a href="https://wa.me/5531996070930?text=Olá%2C%20gostaria%20de%20fazer%20um%20pedido!" target="_blank" class="btn-whatsapp">
+                    <i class="fab fa-whatsapp"></i> Pedir pelo WhatsApp
+                </a>
+                <a href="https://wa.me/c/553196070930" target="_blank" class="btn-catalog">
+                    <i class="fas fa-book"></i> Ver Catálogo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Carol <span>Armarinhos</span></h3>
+                    <p>
+                        Sua loja completa em informática, acessórios, presentes personalizados e serviços.
+                        Compre com conforto e receba em casa.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><a href="tel:5531996070930"><i class="fas fa-phone"></i> (31) 99607-0930</a></li>
+                        <li><a href="mailto:carolarmarinhosbh@gmail.com"><i class="fas fa-envelope"></i> carolarmarinhosbh@gmail.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Praça Santuário São Geraldo, 46B</a></li>
+                        <li><a href="#"><i class="fas fa-city"></i> São Geraldo - Belo Horizonte - MG</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Horário</h4>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-clock"></i> Seg-Sáb: 08:00 - 18:00</a></li>
+                        <li><a href="#"><i class="fas fa-clock"></i> Domingos: Fechado</a></li>
+                        <li><a href="#"><i class="fas fa-id-card"></i> CNPJ: 10.648.303/0001-79</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="#categorias"><i class="fas fa-chevron-right"></i> Produtos</a></li>
+                        <li><a href="#servicos"><i class="fas fa-chevron-right"></i> Serviços</a></li>
+                        <li><a href="#personalizados"><i class="fas fa-chevron-right"></i> Personalizados</a></li>
+                        <li><a href="#presentes"><i class="fas fa-chevron-right"></i> Presentes</a></li>
+                        <li><a href="#galeria"><i class="fas fa-chevron-right"></i> Fotos</a></li>
+                        <li><a href="#entrega"><i class="fas fa-chevron-right"></i> Entregas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Carol Armarinhos - Todos os direitos reservados</p>
+                <div class="social">
+                    <a href="https://instagram.com/carolarmarinhobh" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/5531996070930" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="mailto:carolarmarinhosbh@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== WHATSAPP FLOATING BUTTON ===== -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/5531996070930" target="_blank" class="btn-float" id="whatsappFloat" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <button class="btn-float" style="background:#cc0000;width:48px;height:48px;font-size:20px;animation:none;box-shadow:0 4px 20px rgba(204,0,0,0.25);" id="scheduleBtn" aria-label="Horário de atendimento">
+            <i class="fas fa-clock" style="color:#fff;"></i>
+        </button>
+    </div>
+
+    <!-- ===== MODAL HORÁRIO ===== -->
+    <div class="modal-overlay" id="scheduleModal">
+        <div class="modal-content">
+            <button class="close-modal" id="closeModal">&times;</button>
+            <span class="modal-icon"><i class="fas fa-clock"></i></span>
+            <h2>Horário de Atendimento</h2>
+            <p class="subtitle">Estamos prontos para atender você!</p>
+
+            <div class="schedule-item">
+                <span class="day">Segunda a Sexta</span>
+                <span class="time">08:00 - 18:00</span>
+            </div>
+            <div class="schedule-item">
+                <span class="day">Sábado</span>
+                <span class="time">08:00 - 18:00</span>
+            </div>
+            <div class="schedule-item">
+                <span class="day">Domingo</span>
+                <span class="closed">Fechado</span>
+            </div>
+
+            <a href="https://wa.me/5531996070930" target="_blank" class="modal-whatsapp">
+                <i class="fab fa-whatsapp"></i> Falar agora pelo WhatsApp
+            </a>
+
+            <p style="text-align:center;color:#888;font-size:13px;margin-top:16px;">
+                <i class="fas fa-map-marker-alt" style="color:#cc0000;"></i>
+                Praça Santuário São Geraldo, 46B - São Geraldo - BH
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // ===== MENU MOBILE =====
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // ===== MODAL HORÁRIO =====
+        const modal = document.getElementById('scheduleModal');
+        const scheduleBtn = document.getElementById('scheduleBtn');
+        const closeModal = document.getElementById('closeModal');
+
+        scheduleBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeModal.addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ===== ANIMAÇÃO ON SCROLL =====
+        const animateElements = document.querySelectorAll('.animate-on-scroll');
+
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        animateElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // ===== HEADER SCROLL EFFECT =====
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > 80) {
+                header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.04)';
+                header.style.borderBottom = '2px solid #e8e0d8';
+            } else {
+                header.style.boxShadow = 'none';
+                header.style.borderBottom = '2px solid #f0ece6';
+            }
+        });
+
+        console.log('🚀 Carol Armarinhos - Landing Page carregada com sucesso!');
+        console.log('📱 WhatsApp: (31) 99607-0930');
+        console.log('📍 Praça Santuário São Geraldo, 46B - São Geraldo - BH');
+        console.log('📸 Instagram: @carolarmarinhobh');
+        console.log('📚 Catálogo: https://wa.me/c/553196070930');
+    </script>
+
+</body>
+</html>
