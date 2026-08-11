@@ -251,6 +251,7 @@
             gap: 5px;
             cursor: pointer;
             padding: 4px;
+            z-index: 1001;
         }
 
         .hamburger span {
@@ -396,6 +397,7 @@
             display: flex;
             gap: 32px;
             margin-top: 32px;
+            flex-wrap: wrap;
         }
 
         .hero-stats .stat {
@@ -814,6 +816,7 @@
             color: #cc0000;
             font-size: 16px;
             width: 24px;
+            flex-shrink: 0;
         }
 
         .delivery-image {
@@ -1255,7 +1258,7 @@
 
         /* Mobile */
         @media (max-width: 768px) {
-            /* Header */
+            /* Header - Menu mobile sem scroll horizontal */
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -1291,7 +1294,6 @@
 
             .hamburger {
                 display: flex;
-                z-index: 1001;
             }
 
             /* Hero */
@@ -1314,13 +1316,12 @@
             }
 
             .hero-stats {
-                gap: 20px;
-                flex-wrap: wrap;
+                gap: 16px;
                 justify-content: center;
             }
 
             .hero-stats .stat .number {
-                font-size: 22px;
+                font-size: 20px;
             }
 
             .hero-stats .stat .label {
@@ -1393,7 +1394,7 @@
                 gap: 10px;
             }
 
-            /* Delivery */
+            /* Delivery - corrigido */
             .delivery-content h2 {
                 font-size: 26px;
             }
@@ -1402,8 +1403,15 @@
                 font-size: 14px;
             }
 
+            .delivery-features {
+                align-items: flex-start;
+                text-align: left;
+            }
+
             .delivery-features li {
                 font-size: 13px;
+                text-align: left;
+                justify-content: flex-start;
             }
 
             .delivery-image .placeholder-icon {
@@ -1596,6 +1604,26 @@
             .section-title h2 {
                 font-size: 22px;
             }
+
+            .delivery-features li {
+                font-size: 12px;
+            }
+        }
+
+        /* Overlay para o menu mobile */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+            display: none;
+        }
+
+        .menu-overlay.active {
+            display: block;
         }
     </style>
 </head>
@@ -1673,8 +1701,8 @@
                         <div class="label">Frete grátis* (até 2km)</div>
                     </div>
                     <div class="stat">
-                        <div class="number">+500</div>
-                        <div class="label">Produtos</div>
+                        <div class="number">Grande BH</div>
+                        <div class="label">Entregamos em toda região*</div>
                     </div>
                 </div>
             </div>
@@ -1918,7 +1946,7 @@
                 <ul class="delivery-features">
                     <li><i class="fas fa-check-circle"></i> <strong>Frete grátis</strong> para compras a partir de R$ 50,00* (até 2km)</li>
                     <li><i class="fas fa-clock"></i> <strong>Prazo médio de entrega:</strong> 2 horas</li>
-                    <li><i class="fas fa-map-marked-alt"></i> Entregamos em <strong>toda Belo Horizonte</strong> - consulte condições</li>
+                    <li><i class="fas fa-map-marked-alt"></i> Entregamos em <strong>toda Grande BH</strong> - consulte condições</li>
                     <li><i class="fas fa-shield-alt"></i> <strong>Pagamento seguro</strong> na entrega ou via Pix</li>
                 </ul>
                 <div style="margin-top:20px;">
@@ -2056,15 +2084,31 @@
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
 
-        hamburger.addEventListener('click', function() {
-            this.classList.toggle('active');
+        // Criar overlay para fechar o menu ao clicar fora
+        const overlay = document.createElement('div');
+        overlay.className = 'menu-overlay';
+        document.body.appendChild(overlay);
+
+        function toggleMenu() {
+            hamburger.classList.toggle('active');
             navLinks.classList.toggle('open');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMenu);
+
+        overlay.addEventListener('click', function() {
+            if (navLinks.classList.contains('open')) {
+                toggleMenu();
+            }
         });
 
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navLinks.classList.remove('open');
+                if (navLinks.classList.contains('open')) {
+                    toggleMenu();
+                }
             });
         });
 
